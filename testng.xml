@@ -1,40 +1,68 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 <suite name="Restfull_Booker_Platform_Suite" parallel="tests" thread-count="3">
 
-    <!-- Test API -->
+    <!-- ==================== TEST API ==================== -->
     <test name="API_Tests">
         <parameter name="baseURI" value="http://localhost:3004"/>
+
+        <!-- On inclut uniquement les tests du groupe API -->
+        <groups>
+            <run>
+                <include name="API"/>
+            </run>
+        </groups>
+
         <classes>
             <class name="api.loginAPI_test"/>
+            <!-- Ajouter ici d'autres classes API si besoin -->
         </classes>
     </test>
 
-    <!-- Test UI Chrome -->
+    <!-- ==================== TEST UI CHROME ==================== -->
     <test name="UI_Tests_Chrome">
         <parameter name="browser" value="chrome"/>
         <parameter name="execEnv" value="local"/>
-        <parameter name="url" value="http://localhost"/>
+        <parameter name="url" value="http://localhost:3004"/>
+
+        <!-- Inclure uniquement le groupe UI si tu veux filtrer -->
+        <groups>
+            <run>
+                <include name="UI"/>
+            </run>
+        </groups>
+
         <classes>
             <class name="UI.tests.login_test"/>
+            <!-- Ajouter d'autres classes UI ici -->
         </classes>
     </test>
 
-    <!-- Test UI Firefox (désactivé pour l'instant) -->
+    <!-- ==================== TEST UI FIREFOX ==================== -->
     <test name="UI_Tests_Firefox" enabled="false">
         <parameter name="browser" value="firefox"/>
         <parameter name="execEnv" value="local"/>
-        <parameter name="url" value="http://localhost"/>
+        <parameter name="url" value="http://localhost:3004"/>
+        <groups>
+            <run>
+                <include name="UI"/>
+            </run>
+        </groups>
         <classes>
             <class name="UI.tests.login_test"/>
         </classes>
     </test>
 
-    <!-- Test UI Edge (désactivé pour l'instant) -->
+    <!-- ==================== TEST UI EDGE ==================== -->
     <test name="UI_Tests_Edge" enabled="false">
         <parameter name="browser" value="edge"/>
         <parameter name="execEnv" value="local"/>
-        <parameter name="url" value="http://localhost"/>
+        <parameter name="url" value="http://localhost:3004"/>
+        <groups>
+            <run>
+                <include name="UI"/>
+            </run>
+        </groups>
         <classes>
             <class name="UI.tests.login_test"/>
         </classes>

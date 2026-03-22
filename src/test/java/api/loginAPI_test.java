@@ -8,7 +8,7 @@ import org.testng.annotations.Test;
 
 public class loginAPI_test {
 
-    @Test
+    @Test(groups = {"API"})
     @Parameters({"baseURI"})
     public void loginTest(String baseURI) {
 
