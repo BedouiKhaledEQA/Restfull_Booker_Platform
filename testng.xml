@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+<suite name="Restfull_Booker_Platform_Suite" parallel="tests" thread-count="3">
+
+    <!-- Test API -->
+    <test name="API_Tests">
+        <parameter name="baseURI" value="http://localhost:3004"/>
+        <classes>
+            <class name="api.loginAPI_test"/>
+        </classes>
+    </test>
+
+    <!-- Test UI Chrome -->
+    <test name="UI_Tests_Chrome">
+        <parameter name="browser" value="chrome"/>
+        <parameter name="execEnv" value="local"/>
+        <parameter name="url" value="http://localhost"/>
+        <classes>
+            <class name="UI.tests.login_test"/>
+        </classes>
+    </test>
+
+    <!-- Test UI Firefox (désactivé pour l'instant) -->
+    <test name="UI_Tests_Firefox" enabled="false">
+        <parameter name="browser" value="firefox"/>
+        <parameter name="execEnv" value="local"/>
+        <parameter name="url" value="http://localhost"/>
+        <classes>
+            <class name="UI.tests.login_test"/>
+        </classes>
+    </test>
+
+    <!-- Test UI Edge (désactivé pour l'instant) -->
+    <test name="UI_Tests_Edge" enabled="false">
+        <parameter name="browser" value="edge"/>
+        <parameter name="execEnv" value="local"/>
+        <parameter name="url" value="http://localhost"/>
+        <classes>
+            <class name="UI.tests.login_test"/>
+        </classes>
+    </test>
+
+</suite>
