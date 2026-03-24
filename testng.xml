@@ -5,11 +5,16 @@
 
     <groups>
         <run>
-            <exclude name="UI"/>
+            <include name="UI"/>
             <include name="API"/>
 
         </run>
     </groups>
+
+    <listeners>
+        <listener class-name="utils.ExtentReportManager"/>
+
+    </listeners>
 
     <test name="ChromeTest">
         <parameter name="browser" value="chrome"/>

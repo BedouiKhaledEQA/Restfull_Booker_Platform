@@ -96,29 +96,23 @@ public class Base {
             driver.quit();
         }
 
-        public String captureScreen(String tname) throws IOException {
-            // Timestamp pour le nom du fichier
-            String timeStamp = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
+    public String captureScreen(String tname) throws IOException {
+        String timeStamp = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
+        TakesScreenshot ts = (TakesScreenshot) driver;
+        File sourceFile = ts.getScreenshotAs(OutputType.FILE);
 
-            // Capture le screenshot
-            TakesScreenshot ts = (TakesScreenshot) driver;
-            File sourceFile = ts.getScreenshotAs(OutputType.FILE);
-
-            // Crée le dossier screenshots s'il n'existe pas
-            File screenshotsDir = new File(System.getProperty("user.dir") + "\\screenshots\\");
-            if (!screenshotsDir.exists()) {
-                screenshotsDir.mkdirs();
-            }
-
-            // Chemin complet du fichier
-            String targetFilePath = screenshotsDir + "\\" + tname + "_" + timeStamp + ".png";
-            File targetFile = new File(targetFilePath);
-
-            // Copie le fichier source vers le fichier cible
-            Files.copy(sourceFile.toPath(), targetFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
-
-            return targetFilePath;
+        File screenshotsDir = new File(System.getProperty("user.dir") + File.separator + "screenshots");
+        if (!screenshotsDir.exists()) {
+            screenshotsDir.mkdirs();
         }
+
+        String fileName = tname + "_" + timeStamp + ".png";
+        File targetFile = new File(screenshotsDir, fileName);
+        Files.copy(sourceFile.toPath(), targetFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
+
+        // chemin relatif pour Extent
+        return "screenshots/" + fileName;
+    }
 
 
     }
